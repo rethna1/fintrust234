@@ -1,0 +1,5635 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Smart Shop Manager</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f4f6f9;
+padding:10px;
+max-width:700px;
+margin:auto;
+}
+
+.container{
+background:white;
+padding:15px;
+border-radius:10px;
+box-shadow:0 2px 8px rgba(0,0,0,0.08);
+margin-bottom:15px;
+}
+
+.brand-row{
+display:flex;
+align-items:center;
+gap:10px;
+margin:15px 0;
+}
+
+.logo-circle{
+width:48px;
+height:48px;
+background:#1aa179;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.logo-text{
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+color:white;
+}
+
+.logo-text .fc{
+font-size:14px;
+font-weight:bold;
+line-height:1;
+}
+
+.logo-text .line1,
+.logo-text .line2{
+font-size:6px;
+line-height:1;
+}
+
+.brand-title{
+font-size:22px;
+font-weight:400;
+color:#2c3e50;
+}
+
+.title-section{
+text-align:center;
+margin-bottom:20px;
+}
+
+.main-title{
+    font-size:42px;
+    font-weight:800;
+    color:#2c3e50;
+    text-align:center;
+    margin-bottom:8px;
+    line-height:1.2;
+}
+
+.version-text{
+    font-size:16px;
+    color:#777;
+    text-align:center;
+    margin:0 0 8px;
+}
+
+.subtitle{
+    font-size:15px;
+    color:#666;
+    text-align:center;
+    margin:0;
+}
+
+.version{
+font-size:14px;
+color:#777;
+}
+
+.subtitle{
+font-size:14px;
+color:#666;
+}
+
+.dashboard{
+display:grid;
+grid-template-columns:1fr;
+gap:12px;
+margin-bottom:15px;
+}
+
+.summary-card{
+background:#fff;
+padding:16px;
+border-radius:14px;
+box-shadow:0 3px 10px rgba(0,0,0,.06);
+border:1px solid rgba(0,0,0,.05);
+}
+
+.summary-card h3{
+margin:0 0 12px;
+font-size:18px;
+color:#2c3e50;
+}
+
+.summary-card p{
+margin:8px 0;
+font-size:15px;
+font-weight:600;
+}
+
+.today-card{
+background:#f0fff5;
+}
+
+.balance-card{
+background:#fff8ef;
+}
+
+.month-card{
+background:#f2f8ff;
+}
+
+.year-card{
+background:#f8f3ff;
+}
+
+.activity-card{
+background:#eefcf9;
+}
+
+.inventory-card{
+background:#eefaf3;
+}
+
+.due-tracking-card{
+background:#fff7e6;
+}
+
+input,
+select,
+textarea{
+width:100%;
+padding:12px;
+margin-top:8px;
+margin-bottom:8px;
+border-radius:8px;
+border:2px solid #ccc;
+font-size:16px;
+box-sizing:border-box;
+}
+
+textarea{
+height:90px;
+resize:vertical;
+}
+
+button{
+width:100%;
+padding:12px;
+border:none;
+border-radius:8px;
+background:#2c3e50;
+color:white;
+font-size:15px;
+margin-top:8px;
+cursor:pointer;
+}
+
+.update-btn{
+background:#27ae60;
+}
+
+.delete{
+background:#e74c3c;
+}
+
+.small-btn{
+width:auto;
+padding:8px 12px;
+margin-right:5px;
+margin-top:10px;
+}
+
+.result{
+background:#ecf0f1;
+padding:12px;
+border-radius:8px;
+margin-top:10px;
+line-height:1.7;
+}
+
+.btn-row{
+display:flex;
+gap:8px;
+margin-top:10px;
+}
+
+.btn-row button{
+flex:1;
+}
+
+.footer{
+background:#f8f9fa;
+padding:20px;
+margin-top:25px;
+border-radius:10px;
+text-align:center;
+font-size:13px;
+color:#555;
+}
+
+.section-title{
+font-size:24px;
+font-weight:450;
+color:#2c3e50;
+text-align:center;
+margin-bottom:15px;
+}
+
+.customer-summary{
+background:#fff8e1;
+border-left:5px solid #f39c12;
+padding:15px;
+border-radius:10px;
+margin-bottom:15px;
+line-height:1.8;
+font-size:16px;
+}
+
+.customer-summary h3{
+margin-top:0;
+color:#2c3e50;
+}
+
+.result{
+padding:14px;
+border-radius:16px;
+margin-top:10px;
+box-shadow:0 3px 10px rgba(0,0,0,.06);
+border:1px solid rgba(0,0,0,.05);
+}
+
+.salecash{
+background:#eefaf3;
+}
+
+.salecredit{
+background:#fff8e8;
+}
+
+.collection{
+background:#eef8ff;
+}
+
+.expense{
+background:#fff1f1;
+}
+
+.suppliercredit{
+background:#f7f1ff;
+}
+
+.supplierpayment{
+background:#eefcf9;
+}
+
+.record-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+font-weight:bold;
+font-size:16px;
+cursor:pointer;
+}
+
+.record-sub{
+margin-top:5px;
+color:#666;
+font-size:14px;
+}
+
+.details{
+display:none;
+margin-top:10px;
+padding-top:10px;
+border-top:1px solid #ddd;
+line-height:1.8;
+}
+
+/* ---------- APP PAGES ---------- */
+
+.page{
+display:none;
+padding-bottom:90px;
+animation:fadePage .25s;
+}
+
+.page.active{
+display:block;
+}
+
+@keyframes fadePage{
+from{
+opacity:0;
+transform:translateY(10px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+/* ---------- BOTTOM NAVIGATION ---------- */
+
+.bottom-nav{
+
+position:fixed;
+
+left:0;
+right:0;
+bottom:0;
+
+height:70px;
+
+background:#ffffff;
+
+display:flex;
+
+justify-content:space-around;
+
+align-items:center;
+
+box-shadow:0 -3px 12px rgba(0,0,0,.15);
+
+z-index:99999;
+
+}
+
+.bottom-nav button{
+
+flex:1;
+
+height:100%;
+
+border:none;
+
+background:none;
+
+color:#666;
+
+font-size:13px;
+
+cursor:pointer;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+align-items:center;
+
+gap:4px;
+
+}
+
+.bottom-nav button.active{
+
+color:#1aa179;
+
+font-weight:bold;
+
+}
+
+.bottom-nav button span{
+
+font-size:24px;
+
+line-height:1;
+
+}
+
+.settings-card{
+background:#fff;
+padding:18px;
+margin:18px 0;
+border-radius:12px;
+box-shadow:0 3px 10px rgba(0,0,0,.12);
+}
+
+.settings-card input{
+width:100%;
+padding:12px;
+margin:10px 0;
+font-size:16px;
+border:1px solid #ccc;
+border-radius:8px;
+box-sizing:border-box;
+}
+
+.settings-card button{
+width:100%;
+padding:13px;
+background:#1e88e5;
+color:#fff;
+border:none;
+border-radius:8px;
+font-size:16px;
+cursor:pointer;
+}
+
+/* ---------- DARK MODE ---------- */
+
+body.dark{
+background:#121212;
+color:#f1f1f1;
+}
+
+body.dark .container,
+body.dark .summary-card,
+body.dark .result,
+body.dark .customer-summary{
+
+background:#1f1f1f !important;
+
+color:#f1f1f1;
+
+border-color:#444;
+
+}
+
+body.dark input,
+body.dark select,
+body.dark textarea{
+
+background:#2b2b2b;
+
+color:#fff;
+
+border:2px solid #555;
+
+}
+
+body.dark button{
+
+color:#fff;
+
+}
+
+body.dark .bottom-nav{
+
+background:#1f1f1f;
+
+}
+
+body.dark .bottom-nav button{
+
+color:#bbb;
+
+}
+
+body.dark .bottom-nav button.active{
+
+color:#4dd0e1;
+
+}
+
+body.dark .footer{
+
+background:#1f1f1f;
+
+color:#ccc;
+
+}
+
+body.dark .main-title,
+body.dark .section-title,
+body.dark h2,
+body.dark h3{
+
+color:#ffffff;
+
+}
+
+body.dark .record-sub{
+
+color:#bbb;
+
+}
+
+/* Cards inside expandable sections */
+
+body.dark #homeLowStockList > div,
+body.dark #topSellingList > div{
+
+background:#2b2b2b !important;
+
+color:#ffffff !important;
+
+border:1px solid #444;
+
+}
+
+/* ===== DARK MODE : Expandable Lists ===== */
+
+body.dark #homeLowStockList > div,
+body.dark #topSellingList > div,
+body.dark #customerDueBox > div,
+body.dark #supplierDueBox > div,
+body.dark #lowStockBox > div,
+body.dark #allProductsBox > div{
+
+background:#2b2b2b !important;
+
+color:#ffffff !important;
+
+border:1px solid #444 !important;
+
+}
+
+/* Record headings */
+
+body.dark #customerDueBox b,
+body.dark #supplierDueBox b,
+body.dark #lowStockBox b,
+body.dark #allProductsBox b,
+body.dark #homeLowStockList b,
+body.dark #topSellingList b{
+
+color:#ffffff !important;
+
+}
+
+/* Arrows and section titles */
+
+body.dark .record-header{
+
+color:#ffffff !important;
+
+}
+
+/* Horizontal lines */
+
+body.dark hr{
+
+border-color:#444 !important;
+
+}
+
+/* Purchase Report Tables */
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:10px;
+}
+
+table th{
+    background:#2c3e50;
+    color:#ffffff !important;
+    padding:10px;
+    border:1px solid #dcdcdc;
+    text-align:center;
+    font-weight:bold;
+}
+
+table td{
+    padding:10px;
+    border:1px solid #dcdcdc;
+    text-align:center;
+}
+
+/* Dark Mode */
+
+body.dark table th{
+    background:#34495e !important;
+    color:#ffffff !important;
+}
+
+body.dark table td{
+    background:#2b2b2b;
+    color:#ffffff;
+}
+
+/* Desktop calendar icon */
+
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="month"]::-webkit-calendar-picker-indicator{
+
+filter:invert(1);
+
+cursor:pointer;
+
+opacity:1;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="lockScreen" style="
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#f4f6f9;
+z-index:999999;
+display:flex;
+justify-content:center;
+align-items:center;
+">
+
+<div style="
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 5px 20px rgba(0,0,0,.2);
+width:90%;
+max-width:350px;
+text-align:center;
+">
+
+<h2 style="margin-top:0;">
+🔒 Smart Shop Manager
+</h2>
+
+<p>Enter Password</p>
+
+<input
+type="password"
+id="loginPassword"
+placeholder="Password"
+style="
+width:100%;
+padding:12px;
+font-size:18px;
+text-align:center;
+border-radius:8px;
+border:1px solid #ccc;
+box-sizing:border-box;
+">
+
+<button
+style="
+margin-top:15px;
+background:#1aa179;
+width:100%;
+"
+onclick="unlockApp()">
+
+Unlock
+
+</button>
+
+</div>
+
+</div>
+
+
+Html:
+
+<div id="homePage" class="page active">
+
+
+<!-- TOP GLASS HEADER -->
+
+<div class="container"
+style="
+background:linear-gradient(135deg,#e8f9ff,#ffffff) !important;
+border-radius:25px;
+padding:20px;
+box-shadow:0 5px 20px rgba(0,0,0,.08);
+">
+
+
+<div style="
+display:flex;
+align-items:center;
+justify-content:space-between;
+">
+
+
+<div>
+
+<div style="
+font-size:14px;
+color:#777;
+">
+
+Welcome,
+
+</div>
+
+
+<div style="
+font-size:22px;
+font-weight:800;
+color:#1f3c88;
+">
+
+FinTrust Creations
+
+</div>
+
+
+<div style="
+font-size:14px;
+color:#555;
+margin-top:5px;
+">
+
+Smart Shop Manager
+
+</div>
+
+
+</div>
+
+
+
+<div style="
+font-size:28px;
+">
+
+👤
+
+</div>
+
+
+</div>
+
+
+</div>
+
+<!-- HERO CARD -->
+
+
+<div class="container"
+style="
+background:linear-gradient(135deg,#2748c7,#1aa179) !important;
+color:#fff !important;
+border-radius:25px;
+padding:25px;
+">
+
+
+<h1 style="
+font-size:28px;
+margin:0;
+">
+
+Smart Shop Manager
+
+</h1>
+
+
+<p style="
+font-size:15px;
+">
+
+Daily Sales • Expenses• Credit Tracking
+
+</p>
+
+
+
+<button
+onclick="showPage('transaction')"
+
+style="
+background:white;
+color:#2748c7;
+font-weight:bold;
+margin-top:15px;
+border-radius:30px;
+">
+
++ New Transaction
+
+</button>
+
+
+</div>
+
+
+<!-- LOW STOCK ALERT -->
+
+<div
+id="homeLowStockCard"
+class="summary-card"
+style="background:#fff3cd;margin-bottom:15px;display:none;">
+
+<div class="record-header"
+onclick="toggleHomeLowStock()">
+
+<span>
+⚠️ Low Stock Alert
+(<span id="homeLowStockCount">0</span>)
+</span>
+
+<span id="homeLowStockArrow">▼</span>
+
+</div>
+
+<div
+id="homeLowStockList"
+style="display:none;margin-top:12px;">
+</div>
+
+</div>
+
+<!-- TODAY'S TOP SELLING PRODUCTS -->
+
+<div
+id="topSellingCard"
+class="summary-card"
+style="background:#eef8ff;margin-bottom:15px;display:none;">
+
+<div class="record-header"
+onclick="toggleTopSelling()">
+
+<span>
+⭐ Today's Top Selling Products
+(<span id="topSellingCount">0</span>)
+</span>
+
+<span id="topSellingArrow">▼</span>
+
+</div>
+
+<div
+id="topSellingList"
+style="display:none;margin-top:12px;">
+</div>
+
+</div>
+
+<!-- DASHBOARD -->
+
+<div class="dashboard">
+
+<div class="summary-card today-card">
+
+<h3>☀️ Today's Summary</h3>
+
+<p>💰 Sales : ₹ <span id="todaySales">0</span></p>
+
+<p>💸 Expense : ₹ <span id="todayExpense">0</span></p>
+
+<p>📈 Profit : ₹ <span id="todayProfit">0</span></p>
+
+</div>
+
+<div class="summary-card due-tracking-card">
+
+<h3>⚠️ Outstanding Balances</h3>
+
+<p>🧾 Customer Due : ₹ <span id="customerDue">0</span></p>
+
+<p>🏢 Supplier Due : ₹ <span id="supplierDue">0</span></p>
+
+</div>
+
+<div class="summary-card month-card">
+
+<h3>📅 This Month</h3>
+
+<p>💰 Sales : ₹ <span id="monthSales">0</span></p>
+
+<p>💸 Expense : ₹ <span id="monthExpense">0</span></p>
+
+<p>📈 Profit : ₹ <span id="monthProfit">0</span></p>
+
+</div>
+
+<div class="summary-card year-card">
+
+<h3>📊 This Year</h3>
+
+<p>💰 Sales : ₹ <span id="yearSales">0</span></p>
+
+<p>💸 Expense : ₹ <span id="yearExpense">0</span></p>
+
+<p>📈 Profit : ₹ <span id="yearProfit">0</span></p>
+
+</div>
+
+<div class="summary-card activity-card">
+
+<h3>💳 Credit & Supplier Activity</h3>
+
+<p>
+🧾 Today's Credit Sale :
+₹ <span id="todayCreditSale">0</span>
+</p>
+
+<p>
+💵 Today's Collection :
+₹ <span id="todayCollection">0</span>
+</p>
+
+<p>
+🏢 Today's Supplier Credit :
+₹ <span id="todaySupplierCredit">0</span>
+</p>
+
+<p>
+💳 Today's Supplier Payment :
+₹ <span id="todaySupplierPayment">0</span>
+</p>
+
+</div>
+
+<div class="summary-card inventory-card">
+
+<h3>📦 Inventory Summary</h3>
+
+<p>
+Total Products :
+<span id="totalProducts">0</span>
+</p>
+
+<p>
+Low Stock Items :
+<span id="lowStockCount">0</span>
+</p>
+
+<p>
+💰 Stock Cost Value :
+₹ <span id="inventoryValue">0</span>
+</p>
+
+<p>
+💎 Potential Sales Value :
+₹ <span id="inventorySalesValue">0</span>
+</p>
+
+<p>
+📈 Potential Profit :
+₹ <span id="inventoryProfitValue">0</span>
+</p>
+
+</div>
+
+</div>
+
+<div class="summary-card balance-card">
+
+<div class="record-header"
+onclick="toggleDueTracking()">
+
+<span>⚠️ Outstanding Due Tracking</span>
+
+<span id="dueArrow">▼</span>
+
+</div>
+
+<div id="dueTrackingBox"
+style="display:none;margin-top:15px;">
+
+<!-- CUSTOMER DUES -->
+
+<div class="record-header"
+onclick="toggleCustomerDue()"
+style="margin-top:10px;">
+
+<span>
+👥 Customer Dues
+(<span id="customerDueCount">0</span>)
+</span>
+
+<span id="customerArrow">▼</span>
+
+</div>
+
+<div id="customerDueBox"
+style="display:none;margin-top:10px;">
+</div>
+
+<hr style="margin:15px 0;border:none;border-top:1px solid #ddd;">
+
+<!-- SUPPLIER DUES -->
+
+<div class="record-header"
+onclick="toggleSupplierDue()">
+
+<span>
+🏢 Supplier Dues
+(<span id="supplierDueCount">0</span>)
+</span>
+
+<span id="supplierArrow">▼</span>
+
+</div>
+
+<div id="supplierDueBox"
+style="display:none;margin-top:10px;">
+</div>
+
+</div>
+
+<!-- CUSTOMER LEDGER -->
+
+<div class="container"
+id="ledgerContainer"
+style="display:none;">
+
+<div style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+">
+
+<h3>📒 Customer Ledger</h3>
+
+<button
+class="small-btn delete"
+onclick="closeLedger()">
+
+❌ Close
+
+</button>
+
+</div>
+
+<div id="ledgerOutput"></div>
+
+</div>
+
+<!-- SUPPLIER LEDGER -->
+
+<div class="container"
+id="supplierLedgerContainer"
+style="display:none;">
+
+<div style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+">
+
+<h3>🏢 Supplier Ledger</h3>
+
+<button
+class="small-btn delete"
+onclick="closeLedger()">
+
+❌ Close
+
+</button>
+
+</div>
+
+<div id="supplierLedgerOutput"></div>
+
+</div>
+
+</div>
+
+<!-- FOOTER -->
+
+<div class="footer">
+
+<p>
+
+This application is designed for
+daily shop management purposes.
+
+</p>
+
+<p>
+
+Store sales, expenses,
+customer credits,
+supplier payments
+and daily activities
+can be recorded locally
+on your device.
+
+</p>
+
+<p>
+
+Please take regular backups
+to avoid accidental data loss.
+
+</p>
+
+<p>
+
+<b>
+Support:
+fintrustcreations@gmail.com
+</b>
+
+</p>
+
+<p>
+
+©️
+<span id="year"></span>
+
+FinTrust Creations
+
+</p>
+
+</div>
+
+</div>
+
+<div id="transactionPage" class="page">
+
+<div class="container">
+
+<h2 class="section-title">
+💰 Transactions
+</h2>
+
+<div class="container">
+
+<h3 style="text-align:center;color:#2c3e50;">
+⚡ Quick Transactions
+</h3>
+
+<div style="
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+">
+
+<button
+style="background:#27ae60;"
+onclick="quickType('Sale Cash')">
+💵 Cash Sale
+</button>
+
+<button
+style="background:#f39c12;"
+onclick="quickType('Sale Credit')">
+🧾 Credit Sale
+</button>
+
+<button
+style="background:#3498db;"
+onclick="quickType('Credit Collection')">
+💰 Collection
+</button>
+
+<button
+style="background:#e74c3c;"
+onclick="quickType('Expense')">
+💸 Expense
+</button>
+
+<button
+style="background:#8e44ad;"
+onclick="quickType('Supplier Credit')">
+🏢 Supplier Credit
+</button>
+
+<button
+style="background:#16a085;"
+onclick="quickType('Supplier Payment')">
+💳 Supplier Payment
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ADD / EDIT RECORD -->
+
+<div class="container">
+
+<h3 class="section-title">Add / Edit Record</h3>
+
+<input
+type="hidden"
+id="editIndex">
+
+<label>Name</label>
+
+<input
+id="customer"
+placeholder="Customer / Supplier Name">
+
+<label>Mobile</label>
+
+<input
+id="mobile"
+placeholder="Mobile Number">
+
+<label>Product</label>
+
+<input
+id="item"
+placeholder="Product / Description">
+
+<label>Amount ₹</label>
+
+<input
+type="number"
+id="amount"
+placeholder="Amount">
+
+<label>Type</label>
+
+<select id="type">
+
+<option>Sale Cash</option>
+
+<option>Sale Credit</option>
+
+<option>Credit Collection</option>
+
+<option>Expense</option>
+
+<option>Supplier Credit</option>
+
+<option>Supplier Payment</option>
+
+</select>
+
+<label>Date</label>
+
+<input
+type="date"
+id="date">
+
+<label>Notes</label>
+
+<textarea
+id="note"
+placeholder="Notes">
+</textarea>
+
+<button
+id="saveBtn"
+onclick="saveRecord()">
+
+Add Record
+
+</button>
+
+</div>
+
+<!-- SEARCH -->
+
+<div class="container">
+
+<input
+type="text"
+id="search"
+placeholder="Search Record..."
+onkeyup="render()">
+
+</div>
+
+<!-- RECORDS -->
+
+<div class="container">
+
+<h3>📋 Transaction Records</h3>
+
+<div id="customerSummary"></div>
+
+<div id="output">
+No Records Found
+</div>
+
+</div>
+
+</div>
+
+<div id="inventoryPage" class="page">
+
+<div class="container">
+
+<h2 class="section-title">
+📦 Inventory Management
+</h2>
+
+<input type="hidden" id="productEditIndex">
+
+<input
+id="productName"
+placeholder="Product Name">
+
+<input
+id="productCategory"
+placeholder="Category">
+
+<input
+type="number"
+id="purchasePrice"
+placeholder="Purchase Price">
+
+<input
+type="number"
+id="sellingPrice"
+placeholder="Selling Price">
+
+<input
+type="number"
+id="stockQty"
+placeholder="Current Stock">
+
+<input
+type="number"
+id="lowStockLevel"
+placeholder="Low Stock Alert Level">
+
+<button
+style="background:#27ae60;"
+onclick="saveProduct()">
+
+Add Product
+
+</button>
+
+</div>
+
+<div class="container">
+
+<div class="record-header"
+onclick="toggleInventorySection()">
+
+<span>
+
+📦 Inventory Products
+(<span id="inventoryCount">0</span>)
+
+</span>
+
+<span id="inventoryArrow">▼</span>
+
+</div>
+
+<div
+id="inventorySection"
+style="display:none;margin-top:15px;">
+
+<div class="record-header"
+onclick="toggleLowStock()">
+
+<span>
+
+⚠️ Low Stock Items
+(<span id="lowStockItemsCount">0</span>)
+
+</span>
+
+<span id="lowStockArrow">▼</span>
+
+</div>
+
+<div
+id="lowStockBox"
+style="display:none;margin-top:10px;">
+</div>
+
+<hr>
+
+<div class="record-header"
+onclick="toggleAllProducts()">
+
+<span>
+
+📋 All Products
+(<span id="allProductsCount">0</span>)
+
+</span>
+
+<span id="allProductsArrow">▼</span>
+
+</div>
+
+<div
+id="allProductsBox"
+style="display:none;margin-top:10px;">
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<div id="reportsPage" class="page">
+
+<div class="container">
+
+<h2 class="section-title">
+📊 Reports
+</h2>
+
+</div>
+
+<!-- DATE RANGE REPORT -->
+
+<div class="container">
+
+<h3>📊 Date Range Report</h3>
+
+<label>From Date</label>
+
+<input
+type="date"
+id="fromDate">
+
+<label>To Date</label>
+
+<input
+type="date"
+id="toDate">
+
+<button
+style="background:#3498db;"
+onclick="generateRangeReport()">
+
+Generate Report
+
+</button>
+
+<button
+style="background:#e74c3c;"
+onclick="clearRangeReport()">
+
+Reset Report
+
+</button>
+
+<div
+id="rangeReportOutput"
+style="margin-top:15px;">
+</div>
+
+</div>
+
+<!-- MONTHLY REPORT -->
+
+<div class="container">
+
+<h3>📅 Monthly Report</h3>
+
+<label>Select Month</label>
+
+<input
+type="month"
+id="reportMonth">
+
+<button
+style="background:#8e44ad;"
+onclick="generateMonthlyReport()">
+
+Generate Monthly Report
+
+</button>
+
+<button
+style="background:#e74c3c;"
+onclick="clearMonthlyReport()">
+
+Reset Report
+
+</button>
+
+<div
+id="monthlyReportOutput"
+style="margin-top:15px;">
+</div>
+
+</div>
+
+<!-- MONTHLY COMPARISON -->
+
+<div class="container">
+
+<h3>📈 Monthly Comparison Report</h3>
+
+<label>Select Year</label>
+
+<input
+type="number"
+id="comparisonYear"
+placeholder="Enter Year">
+
+<button
+style="background:#16a085;"
+onclick="generateComparisonReport()">
+
+Generate Comparison Report
+
+</button>
+
+<button
+style="background:#e74c3c;"
+onclick="clearComparisonReport()">
+
+Reset Report
+
+</button>
+
+<div
+id="comparisonReportOutput"
+style="margin-top:15px;">
+</div>
+
+</div>
+
+<!-- SALES DASHBOARD -->
+
+<div class="container">
+
+<h3>📊 Monthly Sales & Profit Dashboard</h3>
+
+<label>Select Year</label>
+
+<input
+type="number"
+id="dashboardYear"
+placeholder="Enter Year">
+
+<button
+style="background:#16a085;"
+onclick="generateDashboard()">
+
+Generate Dashboard
+
+</button>
+
+<button
+style="background:#e74c3c;"
+onclick="clearDashboard()">
+
+Reset Dashboard
+
+</button>
+
+<canvas
+id="salesProfitChart"
+width="350"
+height="500"
+style="
+display:none;
+margin-top:15px;
+max-width:100%;
+">
+</canvas>
+
+</div>
+
+<!-- SUPPLIER PURCHASE REPORT -->
+
+<div class="container">
+
+<h3>🏢 Supplier-wise Purchase Report</h3>
+
+<button
+style="background:#8e44ad;"
+onclick="generateSupplierPurchaseReport()">
+
+Generate Report
+
+</button>
+
+<button
+style="background:#e74c3c;"
+onclick="clearSupplierPurchaseReport()">
+
+Reset Report
+
+</button>
+
+<div
+id="supplierPurchaseOutput"
+style="margin-top:15px;">
+</div>
+
+</div>
+
+<div class="container">
+
+<h3>⭐ Shop Statistics</h3>
+
+<button
+
+style="background:#2c3e50;"
+
+onclick="generateShopStatistics()">
+
+Generate Shop Statistics
+
+</button>
+
+<button
+
+style="background:#e74c3c;"
+
+onclick="clearShopStatistics()">
+
+Reset
+
+</button>
+
+<div
+
+id="shopStatisticsOutput"
+
+style="margin-top:15px;">
+
+</div>
+
+</div>
+
+</div>
+
+
+<div id="settingsPage" class="page">
+
+<div class="container">
+
+<h2 class="section-title">
+⚙️ Settings
+</h2>
+
+</div>
+
+<div class="container">
+
+<h3>💾 Backup & Restore</h3>
+
+<p style="color:#666;line-height:1.7;">
+
+Please take regular backups to avoid accidental data loss.
+
+</p>
+
+<button
+style="background:#2c3e50;"
+onclick="saveBackupFile()">
+
+📤 Save / Share Backup
+
+</button>
+
+<input
+type="file"
+id="backupFile"
+accept=".json"
+style="display:none"
+onchange="restoreBackupFile(event)">
+
+<button
+style="background:#27ae60;"
+onclick="document.getElementById('backupFile').click()">
+
+📂 Restore From File
+
+</button>
+
+</div>
+
+<div class="settings-card">
+
+<h3>🔒 Change Password</h3>
+
+<input
+id="currentPassword"
+type="password"
+placeholder="Current Password">
+
+<input
+id="newPassword"
+type="password"
+placeholder="New Password">
+
+<input
+id="confirmPassword"
+type="password"
+placeholder="Confirm New Password">
+
+<button onclick="changePassword()">
+🔑 Change Password
+</button>
+
+</div>
+
+<button
+style="background:#e74c3c;"
+onclick="logoutApp()">
+
+🔒 Logout
+
+</button>
+
+</div>
+
+<!-- SCROLL TO TOP -->
+
+<style>
+
+#scrollTopBtn{
+
+position:fixed;
+
+right:20px;
+
+bottom:25px;
+
+width:55px;
+
+height:55px;
+
+border:none;
+
+border-radius:50%;
+
+background:#f8f8f8;
+
+box-shadow:0 4px 10px rgba(0,0,0,0.25);
+
+cursor:pointer;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+opacity:0;
+
+visibility:hidden;
+
+transition:.3s;
+
+z-index:9999;
+
+}
+
+#scrollTopBtn.show{
+
+opacity:1;
+
+visibility:visible;
+
+}
+
+#scrollTopBtn svg{
+
+width:22px;
+
+height:22px;
+
+fill:none;
+
+stroke:#000;
+
+stroke-width:4;
+
+stroke-linecap:round;
+
+stroke-linejoin:round;
+
+}
+
+html,
+body{
+    overflow-x:hidden;
+    max-width:100%;
+}
+
+.page{
+    overflow-x:hidden;
+}
+
+</style>
+
+<button
+id="scrollTopBtn"
+onclick="topFunction()">
+
+<svg viewBox="0 0 24 24">
+
+<path d="M6 15l6-6 6 6"/>
+
+</svg>
+
+</button>
+
+<script>
+
+window.onscroll=function(){
+
+let btn=
+document.getElementById(
+"scrollTopBtn"
+);
+
+if(
+
+document.body.scrollTop>150 ||
+
+document.documentElement.scrollTop>150
+
+){
+
+btn.classList.add("show");
+
+}else{
+
+btn.classList.remove("show");
+
+}
+
+};
+
+function topFunction(){
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+}
+
+document.getElementById("year").innerHTML =
+new Date().getFullYear();
+
+</script>
+
+<script>
+
+let records =
+JSON.parse(
+localStorage.getItem("shopRecords")
+) || [];
+
+let recordLimit = 10;
+let showAllRecords = false;
+
+let inventory =
+JSON.parse(
+localStorage.getItem("inventoryData")
+) || [];
+
+/* SAVE */
+
+function saveData(){
+
+localStorage.setItem(
+"shopRecords",
+JSON.stringify(records)
+);
+
+}
+
+/* ADD / UPDATE */
+
+function saveRecord(){
+
+let customer =
+document.getElementById("customer").value.trim();
+
+if(customer===""){
+
+alert("Enter Name");
+
+return;
+
+}
+
+let editIndex =
+document.getElementById("editIndex").value;
+
+let record = {
+
+customer:customer,
+
+mobile:
+document.getElementById("mobile").value,
+
+item:
+document.getElementById("item").value,
+
+amount:
+Number(
+document.getElementById("amount").value
+)||0,
+
+type:
+document.getElementById("type").value,
+
+date:
+document.getElementById("date").value,
+
+note:
+document.getElementById("note").value
+
+};
+
+if(editIndex===""){
+
+records.push(record);
+
+alert("Record Added");
+
+}else{
+
+records[editIndex]=record;
+
+alert("Record Updated");
+
+}
+
+saveData();
+
+clearForm();
+
+render();
+
+}
+
+// Permanent Dark Mode
+
+document.body.classList.add("dark");
+
+/* LOAD EDIT */
+
+function loadEdit(i){
+
+let r = records[i];
+
+document.getElementById("editIndex").value=i;
+
+document.getElementById("customer").value =
+r.customer || "";
+
+document.getElementById("mobile").value =
+r.mobile || "";
+
+document.getElementById("item").value =
+r.item || "";
+
+document.getElementById("amount").value =
+r.amount || "";
+
+document.getElementById("type").value =
+r.type || "Sale Cash";
+
+document.getElementById("date").value =
+r.date || "";
+
+document.getElementById("note").value =
+r.note || "";
+
+document.getElementById("saveBtn").innerHTML =
+"Update Record";
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+/* DELETE */
+
+function deleteRecord(i){
+
+if(confirm("Delete Record ?")){
+
+records.splice(i,1);
+
+saveData();
+
+render();
+
+}
+
+}
+
+/* CLEAR FORM */
+
+function clearForm(){
+
+document.getElementById("editIndex").value="";
+
+document.getElementById("customer").value="";
+
+document.getElementById("mobile").value="";
+
+document.getElementById("item").value="";
+
+document.getElementById("amount").value="";
+
+document.getElementById("type").selectedIndex=0; 
+
+document.getElementById("date").value =
+new Date().toISOString().slice(0,10);
+
+document.getElementById("note").value="";
+
+document.getElementById("saveBtn").innerHTML =
+"Add Record";
+
+document.querySelector("#transactionPage .container:nth-child(2)").style.background="white";
+
+}
+
+function formatDate(dateStr){
+
+if(!dateStr) return "";
+
+let parts = dateStr.split("-");
+
+return parts[2] + "-" + parts[1] + "-" + parts[0];
+
+}
+
+/* RENDER */
+
+function render(){
+
+let sales=0;
+let expense=0;
+
+let todayCreditSale = 0;
+let todayCollection = 0;
+let todaySupplierCredit = 0;
+let todaySupplierPayment = 0;
+
+let monthCreditSale = 0;
+let monthCollection = 0;
+let monthSupplierCredit = 0;
+let monthSupplierPayment = 0;
+
+let yearCreditSale = 0;
+let yearCollection = 0;
+let yearSupplierCredit = 0;
+let yearSupplierPayment = 0;
+
+let customerDue=0;
+let supplierDue=0;
+
+let monthSales=0;
+let monthExpense=0;
+
+let yearSales=0;
+let yearExpense=0;
+
+let currentMonth =
+new Date().toISOString().slice(0,7);
+
+let currentYear =
+new Date().getFullYear();
+
+let key =
+document.getElementById("search")
+.value
+.toLowerCase();
+
+let html="";
+
+let visibleCount = 0;
+
+let summaryHtml = "";
+
+let dueMap = {};
+let supplierMap = {};
+
+let today =
+new Date()
+.toISOString()
+.slice(0,10);
+
+let sorted =
+[...records].sort((a,b)=>
+(b.date||"")
+.localeCompare(a.date||"")
+);
+
+let searchKey =
+document.getElementById("search")
+.value
+.trim()
+.toLowerCase();
+
+if(searchKey !== ""){
+
+let totalSales = 0;
+let totalCredit = 0;
+let totalCollection = 0;
+let totalSupplierCredit = 0;
+let totalSupplierPayment = 0;
+let totalRecords = 0;
+let customerName = "";
+let customerMobile = "";
+
+records.forEach((r)=>{
+
+    let match = false;
+
+    if(
+        (r.customer || "")
+        .toLowerCase()
+        .includes(searchKey)
+    ){
+        match = true;
+    }
+
+    if(
+        String(r.mobile || "")
+        .includes(searchKey)
+    ){
+        match = true;
+    }
+
+    if(match){
+
+        customerName = r.customer || "";
+        customerMobile = r.mobile || "";
+
+        totalRecords++;
+
+        let amount = Number(r.amount) || 0;
+
+        /* SALES */
+
+        if(
+            r.type === "Sale" ||
+            r.type === "Sale Cash" ||
+            r.type === "Sale Credit"
+        ){
+            totalSales += amount;
+        }
+
+        /* CREDIT */
+
+        if(
+            r.type === "Sale Credit" ||
+            r.type === "Customer Credit"
+        ){
+            totalCredit += amount;
+        }
+
+        /* COLLECTION */
+
+        if(
+            r.type === "Credit Collection"
+        ){
+            totalCollection += amount;
+        }
+
+        /* SUPPLIER */
+
+     if(
+    r.type === "Supplier Credit"
+){
+    totalSupplierCredit += amount;
+}
+
+if(
+    r.type === "Supplier Payment"
+){
+    totalSupplierPayment += amount;
+}
+
+if(r.type==="Sale Credit"){
+
+dueMap[r.customer] =
+(dueMap[r.customer] || 0)
++ Number(r.amount);
+
+}
+
+if(r.type==="Credit Collection"){
+
+dueMap[r.customer] =
+(dueMap[r.customer] || 0)
+- Number(r.amount);
+
+}
+
+let supplierKey =
+(r.customer || "") + "|" +
+(r.mobile || "");
+
+if(r.type==="Supplier Credit"){
+
+supplierMap[supplierKey] =
+(supplierMap[supplierKey] || 0)
++ Number(r.amount);
+
+}
+
+if(r.type==="Supplier Payment"){
+
+supplierMap[supplierKey] =
+(supplierMap[supplierKey] || 0)
+- Number(r.amount);
+
+}
+
+    }
+
+});
+
+let balanceDue =
+totalCredit - totalCollection;
+
+if(totalRecords>0){
+
+summaryHtml = `
+
+<div class="customer-summary">
+
+<h3>
+👤 ${customerName}
+</h3>
+
+📞 ${customerMobile}
+
+<br><br>
+
+💰 Total Sales :
+₹ ${totalSales.toLocaleString("en-IN")}
+
+<br>
+
+🧾 Total Credit :
+₹ ${totalCredit.toLocaleString("en-IN")}
+
+<br>
+
+💵 Total Collection :
+₹ ${totalCollection.toLocaleString("en-IN")}
+
+<br>
+
+📈 Customer Due :
+₹ ${balanceDue.toLocaleString("en-IN")}
+
+<br>
+
+🏢 Total Supplier Credit :
+₹ ${totalSupplierCredit.toLocaleString("en-IN")}
+
+<br>
+
+💳 Total Supplier Payment :
+₹ ${totalSupplierPayment.toLocaleString("en-IN")}
+
+<br>
+
+🏢 Supplier Due :
+₹ ${(totalSupplierCredit-totalSupplierPayment).toLocaleString("en-IN")}
+
+<br>
+
+📄 Total Records :
+${totalRecords}
+
+</div>
+
+`;
+
+}
+
+}
+
+sorted.forEach((r)=>{
+
+let originalIndex =
+records.indexOf(r);
+
+/* CUSTOMER DUE TRACKING */
+
+if(r.type==="Sale Credit"){
+
+dueMap[r.customer] =
+(dueMap[r.customer] || 0)
++ Number(r.amount);
+
+}
+
+if(r.type==="Credit Collection"){
+
+dueMap[r.customer] =
+(dueMap[r.customer] || 0)
+- Number(r.amount);
+
+}
+
+/* SUPPLIER DUE TRACKING */
+
+let supplierKey =
+(r.customer || "") + "|" +
+(r.mobile || "");
+
+if(r.type==="Supplier Credit"){
+
+supplierMap[supplierKey] =
+(supplierMap[supplierKey] || 0)
++ Number(r.amount);
+
+}
+
+if(r.type==="Supplier Payment"){
+
+supplierMap[supplierKey] =
+(supplierMap[supplierKey] || 0)
+- Number(r.amount);
+
+}
+
+/* TODAY */
+
+if(r.date===today){
+
+if(
+r.type==="Sale" ||
+r.type==="Sale Cash" ||
+r.type==="Sale Credit"
+){
+sales += Number(r.amount);
+}
+
+if(r.type==="Sale Credit"){
+    todayCreditSale += Number(r.amount);
+}
+
+if(r.type==="Credit Collection"){
+    todayCollection += Number(r.amount);
+}
+
+if(r.type==="Supplier Credit"){
+    todaySupplierCredit += Number(r.amount);
+}
+
+if(r.type==="Supplier Payment"){
+    todaySupplierPayment += Number(r.amount);
+}
+
+if(r.type==="Expense"){
+expense += Number(r.amount);
+}
+
+}
+
+/* CUSTOMER DUE */
+
+if(r.type==="Sale Credit"){
+customerDue += Number(r.amount);
+}
+
+if(r.type==="Credit Collection"){
+customerDue -= Number(r.amount);
+}
+
+/* SUPPLIER DUE */
+
+/* SUPPLIER DUE */
+
+if(r.type==="Supplier Credit"){
+    supplierDue += Number(r.amount);
+}
+
+if(r.type==="Supplier Payment"){
+    supplierDue -= Number(r.amount);
+}
+
+/* MONTHLY */
+
+if((r.date||"").slice(0,7)===currentMonth){
+
+if(
+r.type==="Sale" ||
+r.type==="Sale Cash" ||
+r.type==="Sale Credit"
+){
+monthSales += Number(r.amount);
+}
+
+if(r.type==="Expense"){
+monthExpense += Number(r.amount);
+}
+
+if(r.type==="Sale Credit"){
+    monthCreditSale += Number(r.amount);
+}
+
+if(r.type==="Credit Collection"){
+    monthCollection += Number(r.amount);
+}
+
+if(r.type==="Supplier Credit"){
+    monthSupplierCredit += Number(r.amount);
+}
+
+if(r.type==="Supplier Payment"){
+    monthSupplierPayment += Number(r.amount);
+}
+
+}
+
+/* YEARLY */
+
+if((r.date||"").slice(0,4)==currentYear){
+
+if(
+r.type==="Sale" ||
+r.type==="Sale Cash" ||
+r.type==="Sale Credit"
+){
+yearSales += Number(r.amount);
+}
+
+if(r.type==="Sale Credit"){
+    yearCreditSale += Number(r.amount);
+}
+
+if(r.type==="Expense"){
+    yearExpense += Number(r.amount);
+}
+
+if(r.type==="Credit Collection"){
+    yearCollection += Number(r.amount);
+}
+
+if(r.type==="Supplier Credit"){
+    yearSupplierCredit += Number(r.amount);
+}
+
+if(r.type==="Supplier Payment"){
+    yearSupplierPayment += Number(r.amount);
+}
+
+}
+
+if(
+
+(r.customer||"")
+.toLowerCase()
+.includes(key)
+
+||
+
+(r.mobile||"")
+.includes(key)
+
+||
+
+(r.item||"")
+.toLowerCase()
+.includes(key)
+
+||
+
+(r.type||"")
+.toLowerCase()
+.includes(key)
+
+){
+
+visibleCount++;
+
+if(
+!showAllRecords &&
+key==="" &&
+visibleCount > recordLimit
+){
+return;
+}
+
+let cardClass="";
+
+if(r.type==="Sale Cash"){
+cardClass="salecash";
+}
+else if(r.type==="Sale Credit"){
+cardClass="salecredit";
+}
+else if(r.type==="Credit Collection"){
+cardClass="collection";
+}
+else if(r.type==="Expense"){
+cardClass="expense";
+}
+else if(r.type==="Supplier Credit"){
+cardClass="suppliercredit";
+}
+else if(r.type==="Supplier Payment"){
+cardClass="supplierpayment";
+}
+
+html += `
+
+<div class="result ${cardClass}">
+
+<div class="record-header"
+onclick="
+let d=this.parentElement.querySelector('.details');
+d.style.display=
+d.style.display==='block'
+?'none'
+:'block';
+">
+
+<span>${r.type}</span>
+
+<span>
+₹${Number(r.amount)
+.toLocaleString('en-IN')}
+</span>
+
+</div>
+
+<div class="record-sub">
+
+${r.customer || ""}
+
+•
+
+${formatDate(r.date)}
+
+</div>
+
+<div class="details">
+
+📞 ${r.mobile || ""}
+
+<br>
+
+📦 ${r.item || ""}
+
+<br>
+
+📝 ${r.note || ""}
+
+<div class="btn-row">
+
+<button
+class="small-btn"
+onclick="loadEdit(${originalIndex})">
+
+Edit
+
+</button>
+
+<button
+class="small-btn delete"
+onclick="deleteRecord(${originalIndex})">
+
+Delete
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+});
+
+let totalRecordsCount = sorted.filter(r => {
+
+return (
+
+(r.customer||"")
+.toLowerCase()
+.includes(key)
+
+||
+
+(r.mobile||"")
+.includes(key)
+
+||
+
+(r.item||"")
+.toLowerCase()
+.includes(key)
+
+||
+
+(r.type||"")
+.toLowerCase()
+.includes(key)
+
+);
+
+}).length;
+
+if(
+totalRecordsCount > recordLimit &&
+key === ""
+){
+
+html += `
+
+<div style="text-align:center;margin-top:15px;">
+
+<button
+onclick="toggleRecordView()"
+style="
+width:auto;
+padding:10px 20px;
+background:#3498db;
+">
+
+${showAllRecords ? "Show Less ▲" : "Show More ▼"}
+
+</button>
+
+</div>
+
+`;
+
+}
+
+document.getElementById("todaySales")
+.innerHTML =
+sales.toLocaleString("en-IN");
+
+document.getElementById("todayExpense")
+.innerHTML =
+expense.toLocaleString("en-IN");
+
+document.getElementById("todayProfit")
+.innerHTML =
+(sales-expense)
+.toLocaleString("en-IN");
+
+document.getElementById("monthSales")
+.innerHTML =
+monthSales.toLocaleString("en-IN");
+
+document.getElementById("monthExpense")
+.innerHTML =
+monthExpense.toLocaleString("en-IN");
+
+document.getElementById("todayCreditSale").innerHTML =
+todayCreditSale.toLocaleString("en-IN");
+
+document.getElementById("todayCollection").innerHTML =
+todayCollection.toLocaleString("en-IN");
+
+document.getElementById("todaySupplierCredit").innerHTML =
+todaySupplierCredit.toLocaleString("en-IN");
+
+document.getElementById("todaySupplierPayment").innerHTML =
+todaySupplierPayment.toLocaleString("en-IN");
+
+document.getElementById("monthSales").innerHTML =
+monthSales.toLocaleString("en-IN");
+
+document.getElementById("monthExpense").innerHTML =
+monthExpense.toLocaleString("en-IN");
+
+document.getElementById("yearSales").innerHTML =
+yearSales.toLocaleString("en-IN");
+
+document.getElementById("yearExpense").innerHTML =
+yearExpense.toLocaleString("en-IN");
+
+document.getElementById("customerDue").innerHTML =
+customerDue.toLocaleString("en-IN");
+
+document.getElementById("supplierDue").innerHTML =
+supplierDue.toLocaleString("en-IN");
+
+document.getElementById("monthProfit").innerHTML =
+(monthSales - monthExpense)
+.toLocaleString("en-IN");
+
+document.getElementById("yearProfit").innerHTML =
+(yearSales - yearExpense)
+.toLocaleString("en-IN");
+
+let customerHtml = "";
+let supplierHtml = "";
+
+let customerCount = 0;
+let supplierCount = 0;
+
+Object.keys(dueMap)
+.sort((a,b)=>a.localeCompare(b))
+.forEach(name=>{
+
+if(dueMap[name] > 0){
+
+customerCount++;
+
+let mobile = "";
+
+let customerRecord =
+records.find(r => r.customer === name);
+
+if(customerRecord){
+mobile = customerRecord.mobile || "";
+}
+
+customerHtml += `
+<div style="
+background:#fff8e8;
+padding:10px;
+border-radius:10px;
+margin-bottom:8px;
+">
+
+👤 <b>${name}</b>
+
+<br>
+
+📞 ${mobile}
+
+<br><br>
+
+Outstanding :
+₹ ${dueMap[name].toLocaleString("en-IN")}
+
+<br><br>
+
+<button
+class="small-btn"
+onclick="viewLedger('${name}')">
+
+📒 View Customer Ledger
+
+</button>
+
+</div>
+`;
+
+}
+
+});
+
+Object.keys(supplierMap)
+.sort()
+.forEach(key=>{
+
+let parts = key.split("|");
+
+let name = parts[0] || "";
+
+let mobile = parts[1] || "";
+
+let due = supplierMap[key] || 0;
+
+supplierCount++;
+
+let statusText =
+due <= 0
+? "✅ Cleared"
+: "⚠️ Pending";
+
+supplierHtml += `
+
+<div style="
+background:#f7f1ff;
+padding:10px;
+border-radius:10px;
+margin-bottom:8px;
+">
+
+🏢 <b>${name}</b>
+
+<br>
+
+📞 ${mobile}
+
+<br><br>
+
+Supplier Due :
+₹ ${due.toLocaleString("en-IN")}
+
+<br>
+
+Status :
+${statusText}
+
+<br><br>
+
+<button
+class="small-btn"
+onclick="viewSupplierLedger('${name}','${mobile}')">
+
+📒 View Supplier Ledger
+
+</button>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("customerDueBox").innerHTML =
+customerHtml || "No Customer Due";
+
+document.getElementById("supplierDueBox").innerHTML =
+supplierHtml || "No Supplier Due";
+
+document.getElementById("customerDueCount").innerHTML =
+customerCount;
+
+document.getElementById("supplierDueCount").innerHTML =
+supplierCount;
+
+document.getElementById("customerSummary")
+.innerHTML = summaryHtml;
+
+document.getElementById("output")
+.innerHTML =
+html || "No Records Found";
+
+updateTopSellingProducts();
+
+}
+
+/* BACKUP */
+
+function backupData(){
+
+let backup = {
+
+records: records,
+
+inventory: inventory
+
+};
+
+let msg =
+encodeURIComponent(
+"SHOP BACKUP\n\n" +
+JSON.stringify(backup)
+);
+
+window.open(
+"https://wa.me/?text=" + msg,
+"_blank"
+);
+
+}
+
+/* RESTORE */
+
+function restoreData(){
+
+let txt =
+document.getElementById("restoreBox")
+.value
+.trim();
+
+if(txt===""){
+
+alert("Paste Backup Data");
+
+return;
+
+}
+
+try{
+
+txt =
+txt.replace(
+"SHOP BACKUP",
+""
+).trim();
+
+let data =
+JSON.parse(txt);
+
+/* NEW FORMAT */
+
+if(data.records){
+
+records =
+data.records || [];
+
+inventory =
+data.inventory || [];
+
+}
+
+/* OLD FORMAT COMPATIBILITY */
+
+else{
+
+records = data;
+
+inventory = [];
+
+}
+
+saveData();
+saveInventory();
+
+render();
+renderInventory();
+
+alert("Data Restored Successfully");
+
+}catch{
+
+alert("Invalid Backup Data");
+
+}
+
+}
+
+/* AUTO DATE */
+
+document.getElementById("date").value =
+new Date()
+.toISOString()
+.slice(0,10);
+
+function toggleDueTracking(){
+
+let box =
+document.getElementById("dueTrackingBox");
+
+let arrow =
+document.getElementById("dueArrow");
+
+if(box.style.display==="block"){
+
+box.style.display="none";
+arrow.innerHTML="▼";
+
+document.getElementById("ledgerContainer").style.display = "none";
+
+document.getElementById(
+"supplierLedgerContainer"
+).style.display="none";
+
+}else{
+
+box.style.display="block";
+arrow.innerHTML="▲";
+
+}
+
+}
+
+function toggleCustomerDue(){
+
+let box =
+document.getElementById("customerDueBox");
+
+let arrow =
+document.getElementById("customerArrow");
+
+if(box.style.display==="block"){
+
+box.style.display="none";
+arrow.innerHTML="▼";
+
+}else{
+
+box.style.display="block";
+arrow.innerHTML="▲";
+
+}
+
+}
+
+function toggleSupplierDue(){
+
+let box =
+document.getElementById("supplierDueBox");
+
+let arrow =
+document.getElementById("supplierArrow");
+
+if(box.style.display==="block"){
+
+box.style.display="none";
+arrow.innerHTML="▼";
+
+}else{
+
+box.style.display="block";
+arrow.innerHTML="▲";
+
+}
+
+}
+
+function viewLedger(customerName){
+
+let totalCredit = 0;
+let totalCollection = 0;
+
+let html = "";
+
+records.forEach((r)=>{
+
+if(r.customer === customerName){
+
+if(r.type==="Sale Credit"){
+
+totalCredit += Number(r.amount);
+
+}
+
+if(r.type==="Credit Collection"){
+
+totalCollection += Number(r.amount);
+
+}
+
+html += `
+
+<div class="result">
+
+<b>${r.type}</b>
+
+<br>
+
+📅 ${formatDate(r.date)}
+
+<br>
+
+₹ ${Number(r.amount)
+.toLocaleString("en-IN")}
+
+<br>
+
+📦 ${r.item || ""}
+
+<br>
+
+📝 ${r.note || ""}
+
+</div>
+
+`;
+
+}
+
+});
+
+let balance =
+totalCredit - totalCollection;
+
+document.getElementById(
+"ledgerOutput"
+).innerHTML = `
+
+<div class="customer-summary">
+
+<h3>
+👤 ${customerName}
+</h3>
+
+🧾 Total Credit :
+₹ ${totalCredit.toLocaleString("en-IN")}
+
+<br>
+
+💵 Total Collection :
+₹ ${totalCollection.toLocaleString("en-IN")}
+
+<br>
+
+⚠️ Outstanding :
+₹ ${balance.toLocaleString("en-IN")}
+
+</div>
+
+${html}
+
+`;
+
+document.getElementById(
+"supplierLedgerContainer"
+).style.display="none";
+
+document.getElementById(
+"ledgerContainer"
+).style.display = "block";
+
+document.getElementById(
+"ledgerContainer"
+).scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+function viewSupplierLedger(name,mobile){
+
+let html = "";
+
+let balance = 0;
+
+let totalPurchase = 0;
+let totalPayment = 0;
+
+let supplierRecords = records.filter(r =>
+
+r.customer === name &&
+
+String(r.mobile || "") === String(mobile || "") &&
+
+(
+r.type === "Supplier Credit" ||
+r.type === "Supplier Payment"
+)
+
+);
+
+supplierRecords.sort((a,b)=>
+(a.date||"").localeCompare(b.date||"")
+);
+
+supplierRecords.forEach(r=>{
+
+if(r.type==="Supplier Credit"){
+
+balance += Number(r.amount);
+
+totalPurchase += Number(r.amount);
+
+}
+
+if(r.type==="Supplier Payment"){
+
+balance -= Number(r.amount);
+
+totalPayment += Number(r.amount);
+
+}
+
+html += `
+
+<div class="result ${r.type==="Supplier Credit" ? "suppliercredit" : "supplierpayment"}">
+
+<b>${formatDate(r.date)}</b>
+
+<br>
+
+${r.type}
+
+<br>
+
+₹ ${Number(r.amount).toLocaleString("en-IN")}
+
+<br>
+
+📞 ${r.mobile || ""}
+
+<br>
+
+Running Balance :
+₹ ${balance.toLocaleString("en-IN")}
+
+<br>
+
+📦 ${r.item || ""}
+
+<br>
+
+📝 ${r.note || ""}
+
+</div>
+
+`;
+
+});
+
+document.getElementById(
+"supplierLedgerOutput"
+).innerHTML = `
+
+<div class="customer-summary">
+
+<h3>🏢 ${name}</h3>
+
+📞 ${mobile || ""}
+
+<br><br>
+
+💰 Total Purchases :
+₹ ${totalPurchase.toLocaleString("en-IN")}
+
+<br>
+
+💳 Total Payments :
+₹ ${totalPayment.toLocaleString("en-IN")}
+
+<br>
+
+⚠️ Current Balance :
+₹ ${balance.toLocaleString("en-IN")}
+
+<br>
+
+${balance<=0
+? "✅ Status : Cleared"
+: "⚠️ Status : Pending"}
+
+</div>
+
+${html || "No Supplier Transactions Found"}
+
+`;
+
+document.getElementById(
+"ledgerContainer"
+).style.display="none";
+
+document.getElementById(
+"supplierLedgerContainer"
+).style.display="block";
+
+document.getElementById(
+"supplierLedgerContainer"
+).scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+function generateRangeReport(){
+
+let fromDate =
+document.getElementById("fromDate").value;
+
+let toDate =
+document.getElementById("toDate").value;
+
+if(!fromDate || !toDate){
+
+alert("Select From Date and To Date");
+
+return;
+
+}
+
+let sales = 0;
+let expense = 0;
+let creditSale = 0;
+let collection = 0;
+let supplierCredit = 0;
+let supplierPayment = 0;
+let reportCount = 0;
+
+let html = "";
+
+records.forEach(r=>{
+
+if(
+r.date >= fromDate &&
+r.date <= toDate
+){
+
+reportCount++;
+
+if(
+r.type==="Sale Cash" ||
+r.type==="Sale Credit"
+){
+sales += Number(r.amount);
+}
+
+if(r.type==="Expense"){
+expense += Number(r.amount);
+}
+
+if(r.type==="Sale Credit"){
+creditSale += Number(r.amount);
+}
+
+if(r.type==="Credit Collection"){
+collection += Number(r.amount);
+}
+
+if(r.type==="Supplier Credit"){
+supplierCredit += Number(r.amount);
+}
+
+if(r.type==="Supplier Payment"){
+supplierPayment += Number(r.amount);
+}
+
+html += `
+
+<div class="result">
+
+<b>${r.type}</b>
+
+<br>
+
+👤 ${r.customer} (${r.mobile || ""})
+
+<br>
+
+📅 ${formatDate(r.date)}
+
+<br>
+
+₹ ${Number(r.amount)
+.toLocaleString("en-IN")}
+
+<br>
+
+📦 ${r.item || ""}
+
+</div>
+
+`;
+
+}
+
+});
+
+document.getElementById(
+"rangeReportOutput"
+).innerHTML = `
+
+<div class="customer-summary">
+
+<h3>
+📊 Report Summary
+</h3>
+
+📄 Total Records :
+${reportCount}
+
+<br><br>
+
+📅 From :
+${formatDate(fromDate)}
+
+<br>
+
+📅 To :
+${formatDate(toDate)}
+
+<br><br>
+
+💰 Total Sales :
+₹ ${sales.toLocaleString("en-IN")}
+
+<br>
+
+💸 Total Expense :
+₹ ${expense.toLocaleString("en-IN")}
+
+<br>
+
+📈 Net Profit :
+₹ ${(sales-expense)
+.toLocaleString("en-IN")}
+
+<br>
+
+🧾 Credit Sales :
+₹ ${creditSale.toLocaleString("en-IN")}
+
+<br>
+
+💵 Collections :
+₹ ${collection.toLocaleString("en-IN")}
+
+<br>
+
+🏢 Supplier Credit :
+₹ ${supplierCredit.toLocaleString("en-IN")}
+
+<br>
+
+💳 Supplier Payment :
+₹ ${supplierPayment.toLocaleString("en-IN")}
+
+</div>
+
+${html || "No Records Found"}
+
+`;
+
+}
+
+function clearRangeReport(){
+
+document.getElementById("fromDate").value = "";
+
+document.getElementById("toDate").value = "";
+
+document.getElementById("rangeReportOutput").innerHTML = "";
+
+}
+
+function generateMonthlyReport(){
+
+let month =
+document.getElementById("reportMonth").value;
+
+if(!month){
+
+alert("Select Month");
+
+return;
+
+}
+
+let sales = 0;
+let expense = 0;
+let creditSale = 0;
+let collection = 0;
+let supplierCredit = 0;
+let supplierPayment = 0;
+let reportCount = 0;
+
+let html = "";
+
+records.forEach(r=>{
+
+if((r.date || "").slice(0,7) === month){
+
+reportCount++;
+
+if(
+r.type==="Sale Cash" ||
+r.type==="Sale Credit"
+){
+sales += Number(r.amount);
+}
+
+if(r.type==="Expense"){
+expense += Number(r.amount);
+}
+
+if(r.type==="Sale Credit"){
+creditSale += Number(r.amount);
+}
+
+if(r.type==="Credit Collection"){
+collection += Number(r.amount);
+}
+
+if(r.type==="Supplier Credit"){
+supplierCredit += Number(r.amount);
+}
+
+if(r.type==="Supplier Payment"){
+supplierPayment += Number(r.amount);
+}
+
+html += `
+
+<div class="result">
+
+<b>${r.type}</b>
+
+<br>
+
+👤 ${r.customer}
+(${r.mobile || ""})
+
+<br>
+
+📅 ${formatDate(r.date)}
+
+<br>
+
+₹ ${Number(r.amount)
+.toLocaleString("en-IN")}
+
+<br>
+
+📦 ${r.item || ""}
+
+</div>
+
+`;
+
+}
+
+});
+
+document.getElementById(
+"monthlyReportOutput"
+).innerHTML = `
+
+<div class="customer-summary">
+
+<h3>
+📅 Monthly Summary
+</h3>
+
+📆 Month :
+${month}
+
+<br><br>
+
+📄 Total Records :
+${reportCount}
+
+<br><br>
+
+💰 Total Sales :
+₹ ${sales.toLocaleString("en-IN")}
+
+<br>
+
+💸 Total Expense :
+₹ ${expense.toLocaleString("en-IN")}
+
+<br>
+
+📈 Net Profit :
+₹ ${(sales-expense)
+.toLocaleString("en-IN")}
+
+<br>
+
+🧾 Credit Sales :
+₹ ${creditSale.toLocaleString("en-IN")}
+
+<br>
+
+💵 Collections :
+₹ ${collection.toLocaleString("en-IN")}
+
+<br>
+
+🏢 Supplier Credit :
+₹ ${supplierCredit.toLocaleString("en-IN")}
+
+<br>
+
+💳 Supplier Payment :
+₹ ${supplierPayment.toLocaleString("en-IN")}
+
+</div>
+
+${html || "No Records Found"}
+
+`;
+
+}
+
+function clearMonthlyReport(){
+
+document.getElementById(
+"reportMonth"
+).value = "";
+
+document.getElementById(
+"monthlyReportOutput"
+).innerHTML = "";
+
+}
+
+function generateComparisonReport(){
+
+let year =
+document.getElementById("comparisonYear").value;
+
+if(!year){
+
+alert("Enter Year");
+
+return;
+
+}
+
+let months = [
+"January",
+"February",
+"March",
+"April",
+"May",
+"June",
+"July",
+"August",
+"September",
+"October",
+"November",
+"December"
+];
+
+let totalSales = 0;
+let totalExpense = 0;
+
+let table = `
+<div class="customer-summary">
+
+<h3>
+📈 Yearly Monthly Comparison Report
+</h3>
+
+📅 Year : ${year}
+
+</div>
+
+<div style="overflow:auto;">
+
+<table
+style="
+width:100%;
+border-collapse:collapse;
+background:white;
+">
+
+<tr style="background:#2c3e50;color:white;">
+
+<th style="padding:8px;border:1px solid #ddd;">
+Month
+</th>
+
+<th style="padding:8px;border:1px solid #ddd;">
+Sales
+</th>
+
+<th style="padding:8px;border:1px solid #ddd;">
+Expense
+</th>
+
+<th style="padding:8px;border:1px solid #ddd;">
+Profit
+</th>
+
+</tr>
+`;
+
+for(let m=1;m<=12;m++){
+
+let monthCode =
+year + "-" +
+String(m).padStart(2,"0");
+
+let sales = 0;
+let expense = 0;
+
+records.forEach(r=>{
+
+if(
+(r.date || "").slice(0,7)
+=== monthCode
+){
+
+if(
+r.type==="Sale Cash" ||
+r.type==="Sale Credit"
+){
+sales += Number(r.amount);
+}
+
+if(r.type==="Expense"){
+expense += Number(r.amount);
+}
+
+}
+
+});
+
+let profit = sales - expense;
+
+totalSales += sales;
+totalExpense += expense;
+
+table += `
+
+<tr>
+
+<td style="
+padding:8px;
+border:1px solid #ddd;
+background:white;
+color:#222;
+">
+
+${months[m-1]}
+</td>
+
+<td style="
+padding:8px;
+border:1px solid #ddd;
+background:white;
+color:#222;
+">
+
+₹ ${sales.toLocaleString("en-IN")}
+</td>
+
+<td style="
+padding:8px;
+border:1px solid #ddd;
+background:white;
+color:#222;
+">
+
+₹ ${expense.toLocaleString("en-IN")}
+</td>
+
+<td style="
+padding:8px;
+border:1px solid #ddd;
+background:white;
+color:#222;
+">
+
+₹ ${profit.toLocaleString("en-IN")}
+</td>
+
+</tr>
+
+`;
+
+}
+
+table += `
+
+<tr style="background:#f4f6f9;font-weight:bold;">
+
+<td style="padding:8px;border:1px solid #ddd;">
+TOTAL
+</td>
+
+<td style="padding:8px;border:1px solid #ddd;">
+₹ ${totalSales.toLocaleString("en-IN")}
+</td>
+
+<td style="padding:8px;border:1px solid #ddd;">
+₹ ${totalExpense.toLocaleString("en-IN")}
+</td>
+
+<td style="padding:8px;border:1px solid #ddd;">
+₹ ${(totalSales-totalExpense).toLocaleString("en-IN")}
+</td>
+
+</tr>
+
+</table>
+
+</div>
+`;
+
+document.getElementById(
+"comparisonReportOutput"
+).innerHTML = table;
+
+}
+
+function clearComparisonReport(){
+
+document.getElementById(
+"comparisonYear"
+).value = "";
+
+document.getElementById(
+"comparisonReportOutput"
+).innerHTML = "";
+
+}
+
+function drawChart(
+sales,
+expense,
+profit,
+year
+){
+
+let canvas =
+document.getElementById(
+"salesProfitChart"
+);
+
+let ctx =
+canvas.getContext("2d");
+
+ctx.clearRect(
+0,
+0,
+canvas.width,
+canvas.height
+);
+
+let total =
+sales + expense + profit;
+
+if(total<=0){
+
+ctx.font="18px Arial";
+
+ctx.fillText(
+"No Data Found",
+100,
+180
+);
+
+return;
+
+}
+
+let data = [
+
+{
+label:"Sales",
+value:sales,
+color:"#27ae60"
+},
+
+{
+label:"Expense",
+value:expense,
+color:"#e74c3c"
+},
+
+{
+label:"Profit",
+value:profit,
+color:"#3498db"
+}
+
+];
+
+let startAngle = 0;
+
+data.forEach(part=>{
+
+let sliceAngle =
+(part.value/total)
+*2*Math.PI;
+
+ctx.beginPath();
+
+ctx.moveTo(175,140);
+
+ctx.arc(
+175,
+140,
+100,
+startAngle,
+startAngle+sliceAngle
+);
+
+ctx.closePath();
+
+ctx.fillStyle=
+part.color;
+
+ctx.fill();
+
+startAngle += sliceAngle;
+
+});
+
+/* Title */
+
+ctx.fillStyle="#ffffff";
+
+ctx.font="bold 20px Arial";
+
+ctx.fillText(
+"Year " + year,
+130,
+25
+);
+
+/* Legend */
+
+let y = 270;
+
+data.forEach(part=>{
+
+ctx.fillStyle=
+part.color;
+
+ctx.fillRect(
+20,
+y,
+15,
+15
+);
+
+ctx.fillStyle="#ffffff";
+
+ctx.font="bold 15px Arial";
+
+ctx.fillText(
+part.label +
+" \u20B9 " +
+part.value.toLocaleString("en-IN"),
+45,
+y+12
+);
+
+y+=25;
+
+});
+
+}
+
+function clearDashboard(){
+
+document.getElementById(
+"dashboardYear"
+).value="";
+
+let canvas =
+document.getElementById(
+"salesProfitChart"
+);
+
+let ctx =
+canvas.getContext("2d");
+
+ctx.clearRect(
+0,
+0,
+canvas.width,
+canvas.height
+);
+
+canvas.style.display="none";
+
+}
+
+function saveInventory(){
+
+localStorage.setItem(
+"inventoryData",
+JSON.stringify(inventory)
+);
+
+}
+
+function saveProduct(){
+
+let editIndex =
+document.getElementById("productEditIndex").value;
+
+let product = {
+
+name:
+document.getElementById("productName").value,
+
+category:
+document.getElementById("productCategory").value,
+
+purchase:
+Number(document.getElementById("purchasePrice").value)||0,
+
+selling:
+Number(document.getElementById("sellingPrice").value)||0,
+
+stock:
+Number(document.getElementById("stockQty").value)||0,
+
+low:
+Number(document.getElementById("lowStockLevel").value)||0
+
+};
+
+if(product.name===""){
+
+alert("Enter Product Name");
+
+return;
+
+}
+
+if(editIndex===""){
+
+inventory.push(product);
+
+alert("Product Added");
+
+}else{
+
+inventory[editIndex] = product;
+
+alert("Product Updated");
+
+}
+
+saveInventory();
+
+renderInventory();
+
+clearProductForm();
+
+}
+
+function deleteProduct(i){
+
+if(confirm("Delete Product ?")){
+
+inventory.splice(i,1);
+
+saveInventory();
+
+renderInventory();
+
+}
+
+}
+
+function editProduct(i){
+
+let p = inventory[i];
+
+document.getElementById("productEditIndex").value = i;
+
+document.getElementById("productName").value =
+p.name || "";
+
+document.getElementById("productCategory").value =
+p.category || "";
+
+document.getElementById("purchasePrice").value =
+p.purchase || "";
+
+document.getElementById("sellingPrice").value =
+p.selling || "";
+
+document.getElementById("stockQty").value =
+p.stock || "";
+
+document.getElementById("lowStockLevel").value =
+p.low || "";
+
+document.querySelector(
+'button[onclick="saveProduct()"]'
+).innerHTML = "Update Product";
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+function renderInventory(){
+
+let inventorySalesValue = 0;
+let inventoryProfitValue = 0;
+
+let totalProducts = inventory.length;
+let lowStockCount = 0;
+let inventoryValue = 0;
+
+let allHtml = "";
+let lowHtml = "";
+
+/* SORT PRODUCTS ALPHABETICALLY */
+
+let sortedInventory = [...inventory].sort((a,b)=>
+(a.name || "").localeCompare(
+(b.name || ""),
+undefined,
+{sensitivity:"base"}
+)
+);
+
+sortedInventory.forEach((p)=>{
+
+let originalIndex = inventory.indexOf(p);
+
+inventoryValue +=
+(Number(p.purchase) || 0) *
+(Number(p.stock) || 0);
+
+let stockCostValue =
+(Number(p.purchase) || 0) *
+(Number(p.stock) || 0);
+
+let salesValue =
+(Number(p.selling) || 0) *
+(Number(p.stock) || 0);
+
+let inventoryProfit =
+((Number(p.selling) || 0) -
+(Number(p.purchase) || 0))
+*
+(Number(p.stock) || 0);
+
+inventorySalesValue +=
+(Number(p.selling) || 0) *
+(Number(p.stock) || 0);
+
+inventoryProfitValue +=
+(
+(Number(p.selling) || 0)
+-
+(Number(p.purchase) || 0)
+)
+*
+(Number(p.stock) || 0);
+
+allHtml += `
+
+<div class="result">
+
+<b>${p.name}</b>
+
+<br>
+
+📂 ${p.category}
+
+<br><br>
+
+💵 Purchase Price :
+₹ ${Number(p.purchase).toLocaleString("en-IN")}
+
+<br>
+
+🏷 Selling Price :
+₹ ${Number(p.selling).toLocaleString("en-IN")}
+
+<br>
+
+📦 Stock Qty :
+${Number(p.stock).toLocaleString("en-IN")}
+
+<br><br>
+
+💰 Stock Cost Value :
+₹ ${stockCostValue.toLocaleString("en-IN")}
+
+<br>
+
+💎 Potential Sales Value :
+₹ ${salesValue.toLocaleString("en-IN")}
+
+<br>
+
+📈 Potential Profit :
+₹ ${inventoryProfit.toLocaleString("en-IN")}
+
+<div class="btn-row">
+
+<button
+class="small-btn"
+onclick="editProduct(${originalIndex})">
+
+Edit
+
+</button>
+
+<button
+class="small-btn delete"
+onclick="deleteProduct(${originalIndex})">
+
+Delete
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+if(Number(p.stock) <= Number(p.low)){
+
+lowStockCount++;
+
+lowHtml += `
+
+<div style="
+background:#fff1f1;
+padding:12px;
+border-radius:10px;
+margin-bottom:8px;
+">
+
+<b>${p.name}</b>
+
+<br>
+
+📦 Stock :
+${p.stock}
+
+<br>
+
+⚠️ Low Stock Alert
+
+</div>
+
+`;
+
+}
+
+});
+
+document.getElementById(
+"allProductsBox"
+).innerHTML =
+allHtml || "No Products Added";
+
+document.getElementById(
+"lowStockBox"
+).innerHTML =
+lowHtml || "No Low Stock Items";
+
+document.getElementById(
+"inventoryCount"
+).innerHTML =
+totalProducts;
+
+document.getElementById(
+"allProductsCount"
+).innerHTML =
+totalProducts;
+
+document.getElementById(
+"lowStockItemsCount"
+).innerHTML =
+lowStockCount;
+
+document.getElementById(
+"totalProducts"
+).innerHTML =
+totalProducts;
+
+document.getElementById(
+"lowStockCount"
+).innerHTML =
+lowStockCount;
+
+document.getElementById(
+"inventoryValue"
+).innerHTML =
+inventoryValue.toLocaleString("en-IN");
+
+document.getElementById(
+"inventorySalesValue"
+).innerHTML =
+inventorySalesValue.toLocaleString("en-IN");
+
+document.getElementById(
+"inventoryProfitValue"
+).innerHTML =
+inventoryProfitValue.toLocaleString("en-IN");
+
+updateHomeLowStock();
+
+}
+
+function updateHomeLowStock(){
+
+let html="";
+let count=0;
+
+inventory.forEach(p=>{
+
+if(Number(p.stock)<=Number(p.low)){
+
+count++;
+
+html+=`
+
+<div style="
+padding:10px;
+margin-bottom:8px;
+background:white;
+border-radius:8px;
+">
+
+📦 <b>${p.name}</b>
+
+<br>
+
+Current Stock :
+<b>${p.stock}</b>
+
+<br>
+
+Alert Level :
+${p.low}
+
+</div>
+
+`;
+
+}
+
+});
+
+if(count>0){
+
+document.getElementById("homeLowStockCard").style.display="block";
+
+document.getElementById("homeLowStockCount").innerHTML=count;
+
+document.getElementById("homeLowStockList").innerHTML=html;
+
+}else{
+
+document.getElementById("homeLowStockCard").style.display="none";
+
+}
+
+}
+
+function updateTopSellingProducts(){
+
+let today = new Date().toISOString().slice(0,10);
+
+let items = {};
+
+records.forEach(r=>{
+
+if(
+r.date===today &&
+(r.type==="Sale Cash" || r.type==="Sale Credit")
+){
+
+let item=(r.item||"").trim();
+
+if(item==="") return;
+
+items[item]=(items[item]||0)+1;
+
+}
+
+});
+
+let arr=Object.entries(items);
+
+arr.sort((a,b)=>b[1]-a[1]);
+
+let html="";
+
+if(arr.length){
+
+arr.forEach((p,index)=>{
+
+html+=`
+<div style="
+padding:10px;
+margin-bottom:8px;
+background:white;
+border-radius:8px;
+">
+
+${index+1}. <b>${p[0]}</b><br>
+
+Sold : ${p[1]} time(s)
+
+</div>
+`;
+
+});
+
+document.getElementById("topSellingCard").style.display="block";
+
+document.getElementById("topSellingList").innerHTML=html;
+
+}else{
+
+document.getElementById("topSellingCard").style.display="block";
+
+document.getElementById("topSellingList").innerHTML="No Sales Today";
+
+}
+
+}
+
+function clearProductForm(){
+
+document.getElementById("productEditIndex").value="";
+
+document.getElementById("productName").value="";
+
+document.getElementById("productCategory").value="";
+
+document.getElementById("purchasePrice").value="";
+
+document.getElementById("sellingPrice").value="";
+
+document.getElementById("stockQty").value="";
+
+document.getElementById("lowStockLevel").value="";
+
+document.querySelector(
+'button[onclick="saveProduct()"]'
+).innerHTML = "Add Product";
+
+}
+
+/* LOAD */
+
+render();
+renderInventory();
+updateHomeLowStock();
+updateTopSellingProducts();
+
+function toggleDetails(el){
+
+let d =
+el.parentElement.querySelector(".details");
+
+d.style.display =
+d.style.display==="block"
+? "none"
+: "block";
+
+}
+
+function generateDashboard(){
+
+let year =
+document.getElementById("dashboardYear").value;
+
+if(!year){
+
+alert("Enter Year");
+
+return;
+
+}
+
+let totalSales = 0;
+let totalExpense = 0;
+
+records.forEach(r=>{
+
+if(
+(r.date || "").slice(0,4) === year
+){
+
+if(
+r.type==="Sale Cash" ||
+r.type==="Sale Credit"
+){
+totalSales += Number(r.amount);
+}
+
+if(r.type==="Expense"){
+totalExpense += Number(r.amount);
+}
+
+}
+
+});
+
+let totalProfit =
+totalSales - totalExpense;
+
+document.getElementById(
+"salesProfitChart"
+).style.display="block";
+
+drawChart(
+totalSales,
+totalExpense,
+totalProfit,
+year
+);
+
+}
+
+function toggleInventorySection(){
+
+let box =
+document.getElementById(
+"inventorySection"
+);
+
+let arrow =
+document.getElementById(
+"inventoryArrow"
+);
+
+if(box.style.display==="block"){
+
+box.style.display="none";
+arrow.innerHTML="▼";
+
+}else{
+
+box.style.display="block";
+arrow.innerHTML="▲";
+
+}
+
+}
+
+function toggleLowStock(){
+
+let box =
+document.getElementById(
+"lowStockBox"
+);
+
+let arrow =
+document.getElementById(
+"lowStockArrow"
+);
+
+if(box.style.display==="block"){
+
+box.style.display="none";
+arrow.innerHTML="▼";
+
+}else{
+
+box.style.display="block";
+arrow.innerHTML="▲";
+
+}
+
+}
+
+function toggleAllProducts(){
+
+let box =
+document.getElementById(
+"allProductsBox"
+);
+
+let arrow =
+document.getElementById(
+"allProductsArrow"
+);
+
+if(box.style.display==="block"){
+
+box.style.display="none";
+arrow.innerHTML="▼";
+
+}else{
+
+box.style.display="block";
+arrow.innerHTML="▲";
+
+}
+
+}
+
+function generateSupplierPurchaseReport(){
+
+let supplierData = {};
+
+records.forEach(r=>{
+
+if(
+r.type==="Supplier Credit" ||
+r.type==="Supplier Payment"
+){
+
+let supplierKey =
+(r.customer || "") + "|" +
+(r.mobile || "");
+
+if(!supplierData[supplierKey]){
+
+supplierData[supplierKey] = {
+
+name:r.customer || "",
+mobile:r.mobile || "",
+
+purchase:0,
+payment:0,
+
+products:[]
+};
+
+}
+
+if(r.type==="Supplier Credit"){
+
+supplierData[supplierKey].purchase +=
+Number(r.amount) || 0;
+
+supplierData[supplierKey].products.push({
+
+item:r.item || "Not Available",
+
+amount:Number(r.amount) || 0,
+
+date:r.date || ""
+
+});
+
+}
+
+if(r.type==="Supplier Payment"){
+
+supplierData[supplierKey].payment +=
+Number(r.amount) || 0;
+
+}
+
+}
+
+});
+
+let html = "";
+
+Object.keys(supplierData)
+.sort()
+.forEach(key=>{
+
+let s = supplierData[key];
+
+let due = Math.max(
+0,
+s.purchase - s.payment
+);
+
+let productHtml = "";
+
+if(s.products.length > 0){
+
+productHtml = `
+<table style="
+width:100%;
+border-collapse:collapse;
+margin-top:10px;
+">
+
+<tr style="
+background:#f4f6f9;
+font-weight:bold;
+">
+
+<td style="padding:6px;border:1px solid #ddd;">
+Date
+</td>
+
+<td style="padding:6px;border:1px solid #ddd;">
+Product
+</td>
+
+<td style="padding:6px;border:1px solid #ddd;">
+Amount
+</td>
+
+</tr>
+`;
+
+s.products.forEach(p=>{
+
+productHtml += `
+
+<tr>
+
+<td style="padding:6px;border:1px solid #ddd;">
+${formatDate(p.date)}
+</td>
+
+<td style="padding:6px;border:1px solid #ddd;">
+${p.item}
+</td>
+
+<td style="padding:6px;border:1px solid #ddd;">
+₹ ${p.amount.toLocaleString("en-IN")}
+</td>
+
+</tr>
+
+`;
+
+});
+
+productHtml += "</table>";
+
+}else{
+
+productHtml = "No Products Available";
+
+}
+
+html += `
+
+<div class="customer-summary">
+
+<h3>🏢 ${s.name}</h3>
+
+📞 ${s.mobile}
+
+<br><br>
+
+💰 Total Purchases :
+₹ ${s.purchase.toLocaleString("en-IN")}
+
+<br>
+
+💳 Total Payments :
+₹ ${s.payment.toLocaleString("en-IN")}
+
+<br>
+
+⚠️ Outstanding Due :
+₹ ${due.toLocaleString("en-IN")}
+
+<br><br>
+
+📦 Purchase Details
+
+${productHtml}
+
+</div>
+
+`;
+
+});
+
+document.getElementById(
+"supplierPurchaseOutput"
+).innerHTML =
+html || "No Supplier Purchase Records Found";
+
+}
+
+function clearSupplierPurchaseReport(){
+
+document.getElementById(
+"supplierPurchaseOutput"
+).innerHTML = "";
+
+}
+
+function generateShopStatistics(){
+
+    // all calculation code
+
+
+let totalRecords = records.length;
+
+let totalSales = 0;
+let cashSales = 0;
+let creditSales = 0;
+let totalExpense = 0;
+let totalCollection = 0;
+let supplierPurchase = 0;
+let supplierPayment = 0;
+
+let customerDueMap = {};
+let supplierDueMap = {};
+
+let customerSet = new Set();
+let supplierSet = new Set();
+
+let totalProducts = inventory.length;
+let lowStock = 0;
+let inventoryCost = 0;
+let inventorySales = 0;
+let inventoryProfit = 0;
+
+let firstDate = "";
+let lastDate = "";
+
+let productCount = {};
+
+records.forEach(r=>{
+
+    let amount = Number(r.amount)||0;
+
+    if(!firstDate || r.date<firstDate) firstDate=r.date;
+    if(!lastDate || r.date>lastDate) lastDate=r.date;
+
+    if(r.customer) customerSet.add(r.customer);
+
+    if(r.type==="Sale Cash"){
+        totalSales+=amount;
+        cashSales+=amount;
+    }
+
+    if(r.type==="Sale Credit"){
+        totalSales+=amount;
+        creditSales+=amount;
+
+        customerDueMap[r.customer]=(customerDueMap[r.customer]||0)+amount;
+    }
+
+    if(r.type==="Expense"){
+        totalExpense+=amount;
+    }
+
+    if(r.type==="Credit Collection"){
+        totalCollection+=amount;
+
+        customerDueMap[r.customer]=(customerDueMap[r.customer]||0)-amount;
+    }
+
+    if(r.type==="Supplier Credit"){
+        supplierPurchase+=amount;
+
+        let key=(r.customer||"")+"|"+(r.mobile||"");
+
+        supplierSet.add(key);
+
+        supplierDueMap[key]=(supplierDueMap[key]||0)+amount;
+    }
+
+    if(r.type==="Supplier Payment"){
+        supplierPayment+=amount;
+
+        let key=(r.customer||"")+"|"+(r.mobile||"");
+
+        supplierSet.add(key);
+
+        supplierDueMap[key]=(supplierDueMap[key]||0)-amount;
+    }
+
+    if(
+        (r.type==="Sale Cash" || r.type==="Sale Credit")
+        && r.item
+    ){
+        productCount[r.item]=(productCount[r.item]||0)+1;
+    }
+
+});
+
+inventory.forEach(p=>{
+
+    let stock=Number(p.stock)||0;
+    let purchase=Number(p.purchase)||0;
+    let selling=Number(p.selling)||0;
+    let low=Number(p.low)||0;
+
+    if(stock<=low) lowStock++;
+
+    inventoryCost += purchase*stock;
+
+    inventorySales += selling*stock;
+
+    inventoryProfit += (selling-purchase)*stock;
+
+});
+
+let highestCustomer="";
+let highestCustomerDue=0;
+
+Object.keys(customerDueMap).forEach(name=>{
+
+    if(customerDueMap[name]>highestCustomerDue){
+
+        highestCustomerDue=customerDueMap[name];
+
+        highestCustomer=name;
+
+    }
+
+});
+
+let highestSupplier="";
+let highestSupplierDue=0;
+
+Object.keys(supplierDueMap).forEach(key=>{
+
+    if(supplierDueMap[key]>highestSupplierDue){
+
+        highestSupplierDue=supplierDueMap[key];
+
+        highestSupplier=key.split("|")[0];
+
+    }
+
+});
+
+let bestProduct="None";
+let bestQty=0;
+
+Object.keys(productCount).forEach(item=>{
+
+    if(productCount[item]>bestQty){
+
+        bestQty=productCount[item];
+
+        bestProduct=item;
+
+    }
+
+});
+
+let averageSale=0;
+
+if((cashSales+creditSales)>0){
+
+    let saleCount=records.filter(r=>
+        r.type==="Sale Cash" ||
+        r.type==="Sale Credit"
+    ).length;
+
+    if(saleCount>0){
+
+        averageSale=totalSales/saleCount;
+
+    }
+
+}
+
+let days=1;
+
+if(firstDate && lastDate){
+
+    days=Math.max(
+        1,
+        Math.floor(
+            (
+                new Date(lastDate)-
+                new Date(firstDate)
+            )/86400000
+        )+1
+    );
+
+}
+
+let averageDailySales=totalSales/days;
+
+document.getElementById("shopStatisticsOutput").innerHTML=`
+
+<div class="customer-summary">
+
+<h3>⭐ Shop Statistics</h3>
+
+📄 Total Records :
+<b>${totalRecords}</b>
+
+<br><br>
+
+💰 Total Sales :
+<b>₹ ${totalSales.toLocaleString("en-IN")}</b>
+
+<br>
+
+💵 Cash Sales :
+₹ ${cashSales.toLocaleString("en-IN")}
+
+<br>
+
+🧾 Credit Sales :
+₹ ${creditSales.toLocaleString("en-IN")}
+
+<br>
+
+💳 Credit Collections :
+₹ ${totalCollection.toLocaleString("en-IN")}
+
+<br>
+
+💸 Total Expenses :
+₹ ${totalExpense.toLocaleString("en-IN")}
+
+<br>
+
+📈 Net Profit :
+₹ ${(totalSales-totalExpense).toLocaleString("en-IN")}
+
+<br><br>
+
+👥 Total Customers :
+${customerSet.size}
+
+<br>
+
+🏢 Total Suppliers :
+${supplierSet.size}
+
+<br>
+
+📦 Total Products :
+${totalProducts}
+
+<br>
+
+⚠️ Low Stock Products :
+${lowStock}
+
+<br><br>
+
+💰 Inventory Cost :
+₹ ${inventoryCost.toLocaleString("en-IN")}
+
+<br>
+
+💎 Inventory Sales Value :
+₹ ${inventorySales.toLocaleString("en-IN")}
+
+<br>
+
+📈 Inventory Profit Potential :
+₹ ${inventoryProfit.toLocaleString("en-IN")}
+
+<br><br>
+
+⭐ Best Selling Product :
+<b>${bestProduct}</b>
+
+(${bestQty} Sales)
+
+<br>
+
+💵 Average Sale :
+₹ ${averageSale.toFixed(2)}
+
+<br>
+
+📅 Average Daily Sales :
+₹ ${averageDailySales.toFixed(2)}
+
+<br><br>
+
+👤 Highest Customer Due :
+
+${highestCustomer||"-"}
+
+<br>
+
+₹ ${highestCustomerDue.toLocaleString("en-IN")}
+
+<br><br>
+
+🏢 Highest Supplier Due :
+
+${highestSupplier||"-"}
+
+<br>
+
+₹ ${highestSupplierDue.toLocaleString("en-IN")}
+
+<br><br>
+
+📅 First Transaction :
+
+${firstDate?formatDate(firstDate):"-"}
+
+<br>
+
+📅 Latest Transaction :
+
+${lastDate?formatDate(lastDate):"-"}
+
+</div>
+
+`;
+
+}
+
+function clearShopStatistics(){
+
+    document.getElementById("shopStatisticsOutput").innerHTML="";
+
+}
+
+function toggleRecordView(){
+
+showAllRecords = !showAllRecords;
+
+render();
+
+}
+
+function quickType(type){
+
+    document.getElementById("type").value = type;
+
+    let form =
+    document.querySelector("#transactionPage .container:nth-child(2)");
+
+    switch(type){
+
+        case "Sale Cash":
+            form.style.background="#eefaf3";
+            break;
+
+        case "Sale Credit":
+            form.style.background="#fff8e8";
+            break;
+
+        case "Credit Collection":
+            form.style.background="#eef8ff";
+            break;
+
+        case "Expense":
+            form.style.background="#fff1f1";
+            break;
+
+        case "Supplier Credit":
+            form.style.background="#f7f1ff";
+            break;
+
+        case "Supplier Payment":
+            form.style.background="#eefcf9";
+            break;
+
+        default:
+            form.style.background="white";
+
+    }
+
+ window.scrollTo({
+    top: form.offsetTop - 10,
+    behavior: "smooth"
+});
+
+    setTimeout(function(){
+
+        document.getElementById("customer").focus();
+
+    },300);
+
+}
+
+function showPage(page){
+
+document.querySelectorAll(".page")
+.forEach(p=>p.classList.remove("active"));
+
+document.querySelectorAll(".bottom-nav button")
+.forEach(b=>b.classList.remove("active"));
+
+if(page==="home"){
+
+homePage.classList.add("active");
+
+navHome.classList.add("active");
+
+}
+
+if(page==="transaction"){
+
+transactionPage.classList.add("active");
+
+navTransaction.classList.add("active");
+
+}
+
+if(page==="inventory"){
+
+inventoryPage.classList.add("active");
+
+navInventory.classList.add("active");
+
+}
+
+if(page==="reports"){
+
+reportsPage.classList.add("active");
+
+navReports.classList.add("active");
+
+}
+
+if(page==="settings"){
+
+settingsPage.classList.add("active");
+
+navSettings.classList.add("active");
+
+}
+
+window.scrollTo(0,0);
+
+}
+
+/* ===========================
+   SAVE / SHARE BACKUP
+=========================== */
+
+async function saveBackupFile(){
+
+    let backupData = {
+
+        records: records,
+
+        inventory: inventory,
+
+        backupDate: new Date().toLocaleString()
+
+    };
+
+    let fileName =
+        "SmartShopManager_Backup_" +
+        new Date().toISOString().slice(0,10) +
+        ".json";
+
+    let blob = new Blob(
+        [JSON.stringify(backupData,null,2)],
+        {type:"application/json"}
+    );
+
+    let file = new File(
+        [blob],
+        fileName,
+        {type:"application/json"}
+    );
+
+    /* Mobile Share */
+
+    if(
+        /Android|iPhone|iPad/i.test(navigator.userAgent) &&
+        navigator.share
+    ){
+
+        try{
+
+            await navigator.share({
+
+                title:"Smart Shop Manager Backup",
+
+                text:"Backup File",
+
+                files:[file]
+
+            });
+
+            return;
+
+        }catch(e){
+
+            /* Continue to download */
+
+        }
+
+    }
+
+    /* Desktop Download */
+
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+
+    a.href = url;
+
+    a.download = fileName;
+
+    document.body.appendChild(a);
+
+    a.click();
+
+    setTimeout(function(){
+
+        document.body.removeChild(a);
+
+        URL.revokeObjectURL(url);
+
+    },500);
+
+    alert("Backup downloaded successfully.");
+
+}
+
+/* ===========================
+   RESTORE FROM FILE
+=========================== */
+
+function restoreBackupFile(event){
+
+let file =
+event.target.files[0];
+
+if(!file) return;
+
+let reader =
+new FileReader();
+
+reader.onload = function(e){
+
+try{
+
+let backup =
+JSON.parse(e.target.result);
+
+/* Compatibility */
+
+records =
+backup.records || [];
+
+inventory =
+backup.inventory || [];
+
+saveData();
+
+saveInventory();
+
+render();
+
+renderInventory();
+
+updateHomeLowStock();
+
+updateTopSellingProducts();
+
+alert("Backup Restored Successfully.");
+
+}
+catch{
+
+alert("Invalid Backup File.");
+
+}
+
+document.getElementById("backupFile").value="";
+
+};
+
+reader.readAsText(file);
+
+}
+
+function getAppPassword(){
+
+    let pwd = localStorage.getItem("shopPassword");
+
+    if(!pwd){
+
+        pwd = "1234";
+
+        localStorage.setItem("shopPassword",pwd);
+
+    }
+
+    return pwd;
+
+}
+
+function changePassword(){
+
+    const current =
+        document.getElementById("currentPassword").value.trim();
+
+    const newPwd =
+        document.getElementById("newPassword").value.trim();
+
+    const confirm =
+        document.getElementById("confirmPassword").value.trim();
+
+    const savedPassword = getAppPassword();
+
+    if(current!==savedPassword){
+
+        alert("Current password is incorrect.");
+
+        return;
+
+    }
+
+    if(newPwd.length<4){
+
+        alert("Password must contain at least 4 characters.");
+
+        return;
+
+    }
+
+    if(newPwd!==confirm){
+
+        alert("New password and Confirm password do not match.");
+
+        return;
+
+    }
+
+    localStorage.setItem("shopPassword",newPwd);
+
+    alert("Password changed successfully.");
+
+    document.getElementById("currentPassword").value="";
+    document.getElementById("newPassword").value="";
+    document.getElementById("confirmPassword").value="";
+
+}
+
+function getAppPassword(){
+
+let pwd=
+localStorage.getItem("shopPassword");
+
+if(!pwd){
+
+pwd="1234";
+
+localStorage.setItem(
+"shopPassword",
+pwd
+);
+
+}
+
+return pwd;
+
+}
+
+function logoutApp(){
+
+    if(!confirm("Logout from the application?")){
+        return;
+    }
+
+    document.getElementById("loginPassword").value="";
+
+    document.getElementById("lockScreen").style.display="flex";
+
+    document.getElementById("loginPassword").focus();
+
+    showPage("home");
+
+}
+
+function unlockApp(){
+
+let entered=
+document
+.getElementById("loginPassword")
+.value
+.trim();
+
+if(
+entered===getAppPassword()
+){
+
+document
+.getElementById("lockScreen")
+.style.display="none";
+
+}
+else{
+
+alert("Incorrect Password");
+
+document
+.getElementById("loginPassword")
+.value="";
+
+document
+.getElementById("loginPassword")
+.focus();
+
+}
+
+}
+
+window.addEventListener("load",function(){
+
+    document.getElementById("loginPassword").addEventListener(
+    "keypress",
+    function(e){
+
+        if(e.key==="Enter"){
+
+            unlockApp();
+
+        }
+
+    });
+
+});
+
+function logoutApp(){
+
+    if(!confirm("Logout from the application?")){
+        return;
+    }
+
+    showPage("home");
+
+    document.getElementById("loginPassword").value="";
+
+    document.getElementById("lockScreen").style.display="flex";
+
+    document.getElementById("loginPassword").focus();
+
+}
+
+function toggleHomeLowStock(){
+
+let box =
+document.getElementById("homeLowStockList");
+
+let arrow =
+document.getElementById("homeLowStockArrow");
+
+if(box.style.display==="block"){
+
+box.style.display="none";
+arrow.innerHTML="▼";
+
+}else{
+
+box.style.display="block";
+arrow.innerHTML="▲";
+
+}
+
+}
+
+function toggleTopSelling(){
+
+let box =
+document.getElementById("topSellingList");
+
+let arrow =
+document.getElementById("topSellingArrow");
+
+if(box.style.display==="block"){
+
+box.style.display="none";
+arrow.innerHTML="▼";
+
+}else{
+
+box.style.display="block";
+arrow.innerHTML="▲";
+
+}
+
+}
+
+function closeLedger(){
+
+document.getElementById("ledgerContainer").style.display="none";
+
+document.getElementById("supplierLedgerContainer").style.display="none";
+
+}
+
+</script>
+
+<div class="bottom-nav">
+
+<button
+id="navHome"
+class="active"
+onclick="showPage('home')">
+
+<span>🏠</span>
+
+Home
+
+</button>
+
+
+
+<button
+id="navTransaction"
+onclick="showPage('transaction')">
+
+<span>💰</span>
+
+Transactions
+
+</button>
+
+
+
+<button
+id="navInventory"
+onclick="showPage('inventory')">
+
+<span>📦</span>
+
+Inventory
+
+</button>
+
+
+
+<button
+id="navReports"
+onclick="showPage('reports')">
+
+<span>📊</span>
+
+Reports
+
+</button>
+
+
+
+<button
+id="navSettings"
+onclick="showPage('settings')">
+
+<span>⚙️</span>
+
+Settings
+
+</button>
+
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
